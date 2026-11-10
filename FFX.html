@@ -2027,7 +2027,7 @@ function startFirebase(){
     else { USER.loggedIn = false; USER.name = ''; USER.email = ''; USER.avatar = ''; }
     if(typeof render === 'function'){ try{ render(); }catch(e){} }
   });
-  window.doGoogleLogin = function(){ var p = new firebase.auth.GoogleAuthProvider(); auth.signInWithPopup(p).catch(function(e){ alert(e.message); }); };
+  window.doGoogleLogin = function(){ var p = new firebase.auth.GoogleAuthProvider(); auth.signInWithRedirect(p).catch(function(e){ alert(e.message); }); };
   window.doGoogleLogout = function(){ auth.signOut(); };
 }
 startFirebase();
