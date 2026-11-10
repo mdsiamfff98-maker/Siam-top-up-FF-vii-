@@ -1083,7 +1083,7 @@ html,body,.pk,.po,.btn,.pay,.q,.card,.nav a,.pv-back{touch-action:manipulation}
     <div class="pv-body">
       <ul class="rl">
         <li>সঠিক প্লেয়ার আইডি দিয়ে অর্ডার করুন। ভুল আইডিতে টপআপ হয়ে গেলে কর্তৃপক্ষ দায়ী থাকবে না।</li>
-        <li>অর্ডার করার আগে আইডির নাম চেক করে নিন।</li>
+        <li>অর্ডার করার আগে আইডির নাম চেক করে 🚫 নিন।</li>
         <li>টপআপ সম্পন্ন হতে সাধারণত ২ সেকেন্ড থেকে কয়েক মিনিট সময় লাগতে পারে।</li>
         <li>একবার অর্ডার সাবমিট করার পর বাতিল বা রিফান্ড করা হয় না।</li>
         <li>যেকোনো সমস্যায় অর্ডারের স্ক্রিনশট সহ টেলিগ্রামে যোগাযোগ করুন।</li>
@@ -1419,7 +1419,7 @@ html,body,.pk,.po,.btn,.pay,.q,.card,.nav a,.pv-back{touch-action:manipulation}
     <div class="ct-hi"><svg class="i"><use href="#head"/></svg></div>
     <h1>Contact Us</h1>
     <p>যেকোনো সমস্যা বা প্রশ্নে আমাদের সাথে যোগাযোগ করুন।<br>আমরা সবসময় আপনার পাশে আছি।</p>
-    <span class="ct-live"><i></i>সকাল ৮টা থেকে রাত ১২টা সাপোর্ট চালু</span>
+    <span class="ct-live"><i></i>সকাল ৮টা থেকে রাত 2 টা সাপোর্ট চালু</span>
   </section>
 
   <div class="ct-sec">আমাদের সাথে যুক্ত হোন</div>
@@ -2003,14 +2003,34 @@ setInterval(fetchFreshAccountConfig, 15000);
 // ==========================================
 (function(){
   // লগইন সিস্টেম যুক্ত করলে এখানে ইউজারের তথ্য বসান
-  var USER = {
-    loggedIn: false,          // লগইন থাকলে true
-    name: '',                 // যেমন: 'MD EACIN 69'
-    email: '',                // যেমন: 'eacin69x@gmail.com'
-    avatar: ''                // প্রোফাইল ছবির লিংক (ফাঁকা থাকলে ডিফল্ট আইকন)
-  };
-  var LOGIN_URL = '#';
-  var LOGOUT_URL = '#';
+  var firebaseConfig = {
+  apiKey: "AIzaSyC2E_ZW0Z22NQyj31X9N8P2APTKCHa8X2M",
+  authDomain: "siam-top-up-ff-cfac5.firebaseapp.com",
+  projectId: "siam-top-up-ff-cfac5",
+  storageBucket: "siam-top-up-ff-cfac5.firebasestorage.app",
+  messagingSenderId: "263362458097",
+  appId: "1:263362458097:web:7d58012d9055f53038d450",
+  measurementId: "G-0T2C6E3K6Q"
+};
+var s1 = document.createElement('script'); s1.src = "https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"; document.head.appendChild(s1);
+var s2 = document.createElement('script'); s2.src = "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"; document.head.appendChild(s2);
+var USER = { loggedIn: false, name: '', email: '', avatar: '' };
+var LOGIN_URL = '#';
+var LOGOUT_URL = '#';
+function startFirebase(){
+  if(!window.firebase || !firebase.apps){ setTimeout(startFirebase, 500); return; }
+  if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
+  var auth = firebase.auth();
+  window.myAuth = auth;
+  auth.onAuthStateChanged(function(u){
+    if(u){ USER.loggedIn = true; USER.name = u.displayName || ''; USER.email = u.email || ''; USER.avatar = u.photoURL || ''; }
+    else { USER.loggedIn = false; USER.name = ''; USER.email = ''; USER.avatar = ''; }
+    if(typeof render === 'function'){ try{ render(); }catch(e){} }
+  });
+  window.doGoogleLogin = function(){ var p = new firebase.auth.GoogleAuthProvider(); auth.signInWithPopup(p).catch(function(e){ alert(e.message); }); };
+  window.doGoogleLogout = function(){ auth.signOut(); };
+}
+startFirebase();
 
   var panel = document.getElementById('accPanel');
   var navLinks = [].slice.call(document.querySelectorAll('nav.nav a'));
@@ -2031,9 +2051,9 @@ setInterval(fetchFreshAccountConfig, 15000);
     lo.querySelector('span').textContent = USER.loggedIn ? 'Logout' : 'Login';
     lo.querySelector('use').setAttribute('href', USER.loggedIn ? '#a-power' : '#a-in');
     lo.onclick = function(){
-      var u = USER.loggedIn ? LOGOUT_URL : LOGIN_URL;
-      if (u && u !== '#') location.href = u;
-    };
+  if(USER.loggedIn){ window.doGoogleLogout(); }
+  else { window.doGoogleLogin(); }
+};
   })();
 
   function setNav(open){
