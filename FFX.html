@@ -1551,6 +1551,16 @@ html,body,.pk,.po,.btn,.pay,.q,.card,.nav a,.pv-back{touch-action:manipulation}
       </div>
       <button class="acc-lo" type="button" id="accLo"><svg class="i"><use href="#a-in"/></svg><span>Login</span></button>
     </div>
+    <div id="emailLoginBox" style="background:#fff;padding:16px;border-radius:16px;margin:12px">
+<h3 style="text-align:center;margin:0">Sign in to continue</h3>
+<button onclick="doGoogleLogin()" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:12px;background:#fff;font-weight:700;margin:12px 0">G Continue with Google</button>
+<p style="text-align:center;color:#888;font-size:12px">OR CONTINUE WITH EMAIL</p>
+<input id="loginName" placeholder="Enter your name" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:12px;margin:6px 0;box-sizing:border-box">
+<input id="loginEmail" placeholder="Enter your email" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:12px;margin:6px 0;box-sizing:border-box">
+<input id="loginPass" type="password" placeholder="Enter your password" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:12px;margin:6px 0;box-sizing:border-box">
+<button onclick="doEmailLogin()" style="width:100%;padding:13px;background:#0b2a7a;color:#fff;border:none;border-radius:12px;font-weight:700;margin-top:10px">Sign In</button>
+<button onclick="doEmailSignup()" style="width:100%;padding:13px;background:#fff;color:#0b2a7a;border:1px solid #0b2a7a;border-radius:12px;font-weight:700;margin-top:8px">Create New Account</button>
+</div>
     <nav class="acc-list">
       <a class="acc-it on" href="#account" data-go="account"><svg class="i"><use href="#a-home"/></svg>My Account</a>
       <a class="acc-it" href="#" data-go="orders"><svg class="i"><use href="#a-mark"/></svg>My Orders</a>
