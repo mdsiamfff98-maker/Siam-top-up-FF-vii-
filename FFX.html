@@ -2029,6 +2029,24 @@ function startFirebase(){
   });
   window.doGoogleLogin = function(){ var p = new firebase.auth.GoogleAuthProvider(); auth.signInWithRedirect(p).catch(function(e){ alert(e.message); }); };
   window.doGoogleLogout = function(){ auth.signOut(); };
+  window.doEmailSignup = function(){
+  var e = document.getElementById('loginEmail').value;
+  var p = document.getElementById('loginPass').value;
+  var n = document.getElementById('loginName').value;
+  if(!n){ alert('নাম দাও'); return; }
+  if(!e){ alert('Email দাও'); return; }
+  if(p.length < 6){ alert('Password ৬ সংখ্যার বেশি দাও'); return; }
+  auth.createUserWithEmailAndPassword(e,p).then(function(res){
+    return res.user.updateProfile({displayName: n});
+  }).then(function(){ alert('Account হয়ে গেছে!'); location.reload(); })
+  .catch(function(err){ alert(err.message); });
+};
+window.doEmailLogin = function(){
+  var e = document.getElementById('loginEmail').value;
+  var p = document.getElementById('loginPass').value;
+  auth.signInWithEmailAndPassword(e,p).then(function(){ location.reload(); })
+  .catch(function(err){ alert(err.message); });
+};
 }
 startFirebase();
 
