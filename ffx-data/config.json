@@ -6,20 +6,7 @@
     "banner-1794322470239-4676.jpg",
     "banner-1794322476511-7123.jpg"
   ],
-  "quick": [
-    {
-      "label": "Telegram",
-      "url": "https://t.me/Siamfff55"
-    },
-    {
-      "label": "Tik Tok",
-      "url": "https://www.tiktok.com/@nasimrezabd.official?_r=1&_t=ZS-9BeNWVYX6To"
-    },
-    {
-      "label": "YouTube",
-      "url": "https://www.youtube.com/@siamfffYT"
-    }
-  ],
+  "quick": null,
   "images": {
     "pop": "img-pop-1794322495135.png"
   },
