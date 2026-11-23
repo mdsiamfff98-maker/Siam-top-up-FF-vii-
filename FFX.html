@@ -2065,7 +2065,7 @@ startFirebase();
   var navHome = navLinks[0], navAcc = navLinks[4];
 
   // ইউজার তথ্য বসানো
-  (function render(){
+ function render(){
     var n = USER.name ? USER.name.trim() : '';
     document.getElementById('accName').textContent = USER.loggedIn && n ? 'Hi, ' + n : 'Hi, Guest';
     document.getElementById('accMail').textContent = USER.loggedIn && USER.email ? USER.email : 'লগইন করে অর্ডার করুন';
@@ -2082,7 +2082,8 @@ startFirebase();
   if(USER.loggedIn){ window.doGoogleLogout(); }
   else { window.doGoogleLogin(); }
 };
-  })();
+  }
+render();
 
   function setNav(open){
     if (!navHome || !navAcc) return;
